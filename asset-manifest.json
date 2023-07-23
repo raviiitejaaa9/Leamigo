@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Leamigo/static/css/main.7eb9c628.css",
+    "main.js": "/Leamigo/static/js/main.ba22f62f.js",
+    "static/js/787.eae70c82.chunk.js": "/Leamigo/static/js/787.eae70c82.chunk.js",
+    "index.html": "/Leamigo/index.html",
+    "main.7eb9c628.css.map": "/Leamigo/static/css/main.7eb9c628.css.map",
+    "main.ba22f62f.js.map": "/Leamigo/static/js/main.ba22f62f.js.map",
+    "787.eae70c82.chunk.js.map": "/Leamigo/static/js/787.eae70c82.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7eb9c628.css",
+    "static/js/main.ba22f62f.js"
+  ]
+}
