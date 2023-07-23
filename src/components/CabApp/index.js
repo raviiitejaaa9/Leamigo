@@ -1,4 +1,6 @@
 import {Component} from "react"
+import { differenceInMinutes, differenceInHours, parseISO } from 'date-fns';
+
 
 import CabItem from "../CabItem"
 
@@ -17,6 +19,7 @@ class CabApp extends Component{
         cabsDetails : [],
         from : "",
         to : "",
+        date : "",
         apiStatus : apiStateConstants.static,
     }
 
@@ -58,6 +61,7 @@ class CabApp extends Component{
 
         const filteredList = this.getFilteredList(modifiedCabDetails)
         // console.log(filteredList)
+
         this.setState({
             cabsDetails : [...filteredList],
             apiStatus  : apiStateConstants.success
@@ -105,20 +109,38 @@ class CabApp extends Component{
         this.setState({
             to : endPoint,
         })
-    }  
+    } 
+    
+    onChangeDate = (event) => {
+        const inputDate = event.target.value 
+        this.setState({
+            date : inputDate,
+        })
+    } 
 
     renderSuccessView = () => {
-        const {cabsDetails} = this.state
+        const {cabsDetails, date} = this.state
         // console.log(cabsDetails.length)
-        if(cabsDetails.length > 0) {
+        const currentDate = new Date()
+        console.log(currentDate)
+        const givenDate = new Date(date)
+        console.log(givenDate)
+
+        const hoursDifference = differenceInHours(givenDate, currentDate);
+        console.log(hoursDifference)
+        
+        if(cabsDetails.length > 0 && hoursDifference >= 0.25 ) {
             return(
                 <div className="cab-items-container" >
                 {
                     cabsDetails.map(eachItem => (
-                    < CabItem key = {eachItem.id} eachCab = {eachItem}  />
+                    < CabItem key = {eachItem.id} eachCab = {eachItem} date = {date}  />
                 ))}
                 </div>
             )
+        }
+        else if(cabsDetails.length > 0 && hoursDifference <= 0 ) {
+            return <h1 className="error-msg"> Currently We can't take you back in Time </h1>
         }
         else{
             return <h1 className="error-msg"> No Cabs available between the selected Locations  </h1>
@@ -168,6 +190,7 @@ class CabApp extends Component{
                 <div className="search-container" >
                     <input onChange={this.onChangeStartingPoint}  className="search-el" type = "search" placeholder="Starting Point" value={from}  />
                     <input onChange={this.onChangeDeatinationPoint} className="search-el" type = "search" placeholder="Destination Point" value={to} />
+                    <input className="date-el" onChange={this.onChangeDate} type = "date" />
                     <button className="search-button" type = "button"  onClick={this.getCabs}  > Search  </button>
                 </div>
                 {this.renderView()}

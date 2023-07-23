@@ -1,7 +1,7 @@
 import "./index.css"
 
 const CabItem = props => {
-    const {eachCab} = props 
+    const {eachCab, date} = props 
     const {driverName, carModel, carImageUrl, licensePlate, available, from, to} = eachCab
     // console.log(carModel)
     // console.log(carImageUrl)
@@ -17,7 +17,8 @@ const CabItem = props => {
                 Driver Name : {driverName} <br/>
                 Licence Plate : {licensePlate} <br/>
                  Route Info : {from} - {to} <br/>
-                 Availability : {available ? "Available" : "Not Available" } 
+                 Availability : {available ? "Available" : "Not Available" }<br/>
+                 Date : {date} 
                  </p>
             </div>
             <div className="services-sec" >
